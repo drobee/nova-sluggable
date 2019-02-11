@@ -5,25 +5,30 @@
                 :id="field.name"
                 type="text"
                 class="w-full form-control form-input form-input-bordered"
-                :class="errorClasses"
                 :placeholder="field.name"
                 v-model="value"
             />
 
             <p v-if="hasError" class="my-2 text-danger">
-                {{ firstError }}
+                {{ firstError }}dsadas
             </p>
         </template>
     </default-field>
 </template>
 
 <script>
-import { FormField, HandlesValidationErrors } from 'laravel-nova'
+import { FormField, HandlesValidationErrors, Errors } from 'laravel-nova'
 
 export default {
     mixins: [FormField, HandlesValidationErrors],
 
     props: ['resourceName', 'resourceId', 'field'],
+
+    data: () => ({
+        validationErrors: new Errors(),
+        updating: false,
+        initialValue: ''
+    }),
 
     /**
      * Mount the component.
@@ -39,29 +44,34 @@ export default {
          * Generate the slug
          */
         generateSlug(value) {
+            this.validationErrors = new Errors()
             const options = {
                 model: this.field.model || null,
                 options: this.field.options || null,
                 attribute: this.field.attribute || null,
+                updating: this.updating,
+                initialValue: this.initialValue,
                 value,
             }
+
             Nova.request().post('/nova-vendor/nova-sluggable/generate', options)
-                .then(response => {
-                    this.value = response.data.slug
-                })
-                .catch(error => {
-                    const errorData = error.response.data.error || null;
-                    if (errorData) {
-                        this.hasError = true
-                        this.firstError = errorData
-                    }
-                })
+                    .then(response => {
+                        this.value = response.data.slug
+                    }).catch(error => {
+                        if (error.response.status == 422) {
+                            this.validationErrors = new Errors(error.response.data.errors)
+                        }
+                    })
         },
         /*
          * Set the initial, internal value for the field.
          */
         setInitialValue() {
             this.value = this.field.value || ''
+            this.initialValue = this.value
+            if (this.value) {
+                this.updating = true
+            } 
         },
 
         /**
@@ -77,6 +87,18 @@ export default {
         handleChange(value) {
             this.value = value
         },
+    },
+
+    computed: {
+        hasError() {
+            return this.validationErrors.has(this.field.attribute)
+        },
+
+        firstError() {
+            if (this.hasError) {
+                return this.validationErrors.first(this.field.attribute)
+            }
+        }
     },
 }
 </script>

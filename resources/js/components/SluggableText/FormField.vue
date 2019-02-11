@@ -24,10 +24,16 @@ export default {
 
     methods: {
         handleKeydown(event) {
-            Nova.$emit('field-update-' + this.field.slug, {
+            Nova.$emit('field-update-' + this.slugField, {
                 value: event.target.value
             })
         },
     },
+
+    computed: {
+        slugField() {
+            return this.field.slug || 'Slug'
+        }
+    }
 }
 </script>
