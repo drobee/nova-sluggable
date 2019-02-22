@@ -22,6 +22,7 @@ Add a new `SluggableText` and a `Slug` field to your Nova Resource:
 
 ```php
 use Drobee\NovaSluggable\SluggableText;
+use Drobee\NovaSluggable\Slug;
 
 SluggableText::make('Title');
 Slug::make('Slug');
