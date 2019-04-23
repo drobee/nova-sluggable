@@ -4,7 +4,7 @@
             <input
                 :id="field.name"
                 type="text"
-                @keyup="handleKeydown"
+                @blur="handleKeydown"
                 class="w-full form-control form-input form-input-bordered"
                 :class="errorClasses"
                 :placeholder="field.name"
