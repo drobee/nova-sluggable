@@ -4,7 +4,8 @@
             <input
                 :id="field.name"
                 type="text"
-                @blur="handleKeydown"
+                @keyup="handleChange"
+                @blur="handleChange"
                 class="w-full form-control form-input form-input-bordered"
                 :class="errorClasses"
                 :placeholder="field.name"
@@ -23,8 +24,8 @@ export default {
     props: ['resourceName', 'resourceId', 'field'],
 
     methods: {
-        handleKeydown(event) {
-            Nova.$emit('field-update-' + this.slugField, {
+        handleChange(event) {
+            Nova.$emit('field-update-' + event.type + '-' + this.slugField, {
                 value: event.target.value
             })
         },

@@ -15,7 +15,9 @@ class Slug extends Field
      */
     public $component = 'nova-sluggable-slug-field';
     
-    protected $options = [];
+    protected $options = [
+        'event' => 'keyup',
+    ];
 
     public function slugModel(string $model): Element
     {
@@ -41,7 +43,16 @@ class Slug extends Field
 	{
 		return $this->setOption('slugLanguage', $language);
 	}
-	
+
+	public function event(string $eventType): Element
+	{
+		if (in_array($eventType, ['keyup', 'blur'])) {
+			return $this->setOption('event', $eventType);
+		}
+
+		return $this->setOption('event', 'keyup');
+	}
+
 	protected function setOption(string $name, string $value): Element
 	{
 		$this->options[$name] = $value;

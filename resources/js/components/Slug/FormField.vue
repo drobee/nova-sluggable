@@ -34,7 +34,8 @@ export default {
      * Mount the component.
      */
     mounted() {
-        Nova.$on('field-update-' + this.field.name, ({value}) => {
+        const eventType = this.field.options.event || 'keyup';
+        Nova.$on('field-update-' + eventType + '-' + this.field.name, ({value}) => {
             this.generateSlug(value)
         })
     },

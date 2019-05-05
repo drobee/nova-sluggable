@@ -28,7 +28,7 @@ SluggableText::make('Title');
 Slug::make('Slug');
 ```
 
-When the user types a string in the `SluggableText` field the value is being sent the API to generate the slug and and then it sets the `Slug` field's value to the that.
+When the user types a string in the `SluggableText` field the value is being sent the API to generate the slug and and then it sets the `Slug` field's value to the that. The slug is updated on every `key up` event, but it can be tied to `blur` event on the title field.
 
 By default it looks for a `Slug` type field with the name Slug.
 
@@ -76,6 +76,18 @@ Slug::make('Slug')->slugSeparator('.');
 Default value: `-`
 
 Note: the generated slug may be few characters longer than the value specified, due to the suffix which is added to make it unique.
+
+#### Update event
+
+By default the slug updates on every `keyup` event, but you can tie it to the `blur` event:
+
+```php
+Slug::make('Slug')->event('blur');
+```
+
+Accepted values: `keyup`, `blur`
+
+Default value: `keyup`
 
 #### Unique slug and Eloquent model
 
