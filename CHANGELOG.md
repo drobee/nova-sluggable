@@ -2,6 +2,14 @@
 
 All notable changes to `nova-sluggable` will be documented in this file
 
+## 1.1.2 - 2019-05-06
+
+- Option to set triggering event
+
+## 1.1.1 - 2019-03-02
+
+- Laravel 5.8 support
+
 ## 1.1.0 - 2019-02-11
 
 - Added compatibility with [Spatie\Sluggable](https://github.com/spatie/laravel-sluggable)
