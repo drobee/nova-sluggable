@@ -10,7 +10,7 @@
             />
 
             <p v-if="hasError" class="my-2 text-danger">
-                {{ firstError }}dsadas
+                {{ firstError }}
             </p>
         </template>
     </default-field>
