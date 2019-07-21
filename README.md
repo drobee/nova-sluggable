@@ -24,8 +24,22 @@ Add a new `SluggableText` and a `Slug` field to your Nova Resource:
 use Drobee\NovaSluggable\SluggableText;
 use Drobee\NovaSluggable\Slug;
 
-SluggableText::make('Title');
-Slug::make('Slug');
+class User extends Resource
+{
+    // ...
+
+    public function fields(Request $request)
+    {
+        return [
+            // ...
+
+            SluggableText::make('Title'),
+            Slug::make('Slug'),
+
+            // ...
+        ];
+    }
+}
 ```
 
 When the user types a string in the `SluggableText` field the value is being sent the API to generate the slug and and then it sets the `Slug` field's value to the that. The slug is updated on every `key up` event, but it can be tied to `blur` event on the title field.

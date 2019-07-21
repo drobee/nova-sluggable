@@ -2,6 +2,11 @@
 
 All notable changes to `nova-sluggable` will be documented in this file
 
+## 1.1.3 - 2019-07-21
+
+- Vue component matches TextFields's functionality
+- Fixes an issue occured when Slug field was used withouth any option (#6)
+
 ## 1.1.2 - 2019-05-06
 
 - Option to set triggering event
