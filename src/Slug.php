@@ -19,43 +19,49 @@ class Slug extends Field
         'event' => 'keyup',
     ];
 
+    public function __construct($name, $attribute = null, callable $resolveCallback = null)
+    {
+        $this->withMeta(['options' => $this->options]);
+        parent::__construct($name, $attribute, $resolveCallback);
+    }
+
     public function slugModel(string $model): Element
     {
         return $this->withMeta(['model' => $model]);
     }
     
     public function slugUnique(): Element
-	{
-		return $this->setOption('generateUniqueSlugs', true);
-	}
+    {
+        return $this->setOption('generateUniqueSlugs', true);
+    }
 
-	public function slugMaxLength(int $length): Element
-	{
-		return $this->setOption('maximumLength', $length);
-	}
+    public function slugMaxLength(int $length): Element
+    {
+        return $this->setOption('maximumLength', $length);
+    }
 
-	public function slugSeparator(string $separator): Element
-	{
-		return $this->setOption('slugSeparator', $separator);
-	}
+    public function slugSeparator(string $separator): Element
+    {
+        return $this->setOption('slugSeparator', $separator);
+    }
 
-	public function slugLanguage(string $language): Element
-	{
-		return $this->setOption('slugLanguage', $language);
-	}
+    public function slugLanguage(string $language): Element
+    {
+        return $this->setOption('slugLanguage', $language);
+    }
 
-	public function event(string $eventType): Element
-	{
-		if (in_array($eventType, ['keyup', 'blur'])) {
-			return $this->setOption('event', $eventType);
-		}
+    public function event(string $eventType): Element
+    {
+        if (in_array($eventType, ['keyup', 'blur'])) {
+            return $this->setOption('event', $eventType);
+        }
 
-		return $this->setOption('event', 'keyup');
-	}
+        return $this->setOption('event', 'keyup');
+    }
 
-	protected function setOption(string $name, string $value): Element
-	{
-		$this->options[$name] = $value;
-		return $this->withMeta(['options' => $this->options]);
-	}
+    protected function setOption(string $name, string $value): Element
+    {
+        $this->options[$name] = $value;
+        return $this->withMeta(['options' => $this->options]);
+    }
 }
