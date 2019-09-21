@@ -7,6 +7,7 @@
                 class="w-full form-control form-input form-input-bordered"
                 :placeholder="field.name"
                 v-model="value"
+                :disabled="isReadonly"
             />
 
             <p v-if="hasError" class="my-2 text-danger">
