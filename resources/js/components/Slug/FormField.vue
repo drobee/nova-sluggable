@@ -7,6 +7,7 @@
                 class="w-full form-control form-input form-input-bordered"
                 :placeholder="field.name"
                 :disabled="isReadonly"
+                :dusk="field.attribute"
                 v-model="value"
                 v-bind="field.extraAttributes"
             />

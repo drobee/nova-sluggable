@@ -3,6 +3,7 @@
         <template slot="field">
             <input
                 :id="field.name"
+                :dusk="field.attribute"
                 type="text"
                 @keyup="handleChange"
                 @blur="handleChange"
