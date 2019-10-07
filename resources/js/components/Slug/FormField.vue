@@ -6,8 +6,9 @@
                 type="text"
                 class="w-full form-control form-input form-input-bordered"
                 :placeholder="field.name"
-                v-model="value"
                 :disabled="isReadonly"
+                v-model="value"
+                v-bind="field.extraAttributes"
             />
 
             <p v-if="hasError" class="my-2 text-danger">
@@ -73,7 +74,7 @@ export default {
             this.initialValue = this.value
             if (this.value) {
                 this.updating = true
-            } 
+            }
         },
 
         /**
