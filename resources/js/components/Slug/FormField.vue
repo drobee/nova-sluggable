@@ -5,11 +5,10 @@
                 :id="field.name"
                 type="text"
                 class="w-full form-control form-input form-input-bordered"
-                :placeholder="field.name"
                 :disabled="isReadonly"
                 :dusk="field.attribute"
                 v-model="value"
-                v-bind="field.extraAttributes"
+                v-bind="extraAttributes"
             />
 
             <p v-if="hasError" class="my-2 text-danger">
@@ -94,6 +93,21 @@ export default {
     },
 
     computed: {
+        defaultAttributes() {
+            return {
+                placeholder: this.field.placeholder || this.field.name,
+            }
+        },
+
+        extraAttributes() {
+            const attrs = this.field.extraAttributes
+
+            return {
+                ...this.defaultAttributes,
+                ...attrs,
+            }
+        },
+
         hasError() {
             return this.validationErrors.has(this.field.attribute)
         },
