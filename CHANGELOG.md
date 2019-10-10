@@ -2,6 +2,20 @@
 
 All notable changes to `nova-sluggable` will be documented in this file
 
+## 1.2.2 - 2019-10-10
+
+- Laravel 6.1+ support
+- extraAttributes for Slug and dusk attribute
+
+## 1.2.1 - 2019-09-29
+
+- readOnly option for Slug field
+  
+
+## 1.2.0 - 2019-09-17
+
+- Laravel 6.0 support
+
 ## 1.1.3 - 2019-07-21
 
 - Vue component matches TextFields's functionality
