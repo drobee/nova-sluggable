@@ -2,7 +2,6 @@
 
 namespace Drobee\NovaSluggable;
 
-use Laravel\Nova\Element;
 use Laravel\Nova\Fields\Text;
 
 class SluggableText extends Text
@@ -16,9 +15,9 @@ class SluggableText extends Text
 
     /**
      * @param string $slugField
-     * @return Element
+     * @return $this
      */
-    public function slug($slugField = 'Slug'): Element
+    public function slug($slugField = 'Slug'): self
     {
         return $this->withMeta([__FUNCTION__ => $slugField]);
     }
