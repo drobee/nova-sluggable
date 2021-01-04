@@ -3,7 +3,6 @@
 namespace Drobee\NovaSluggable;
 
 use Laravel\Nova\Fields\Field;
-use Laravel\Nova\Element;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Slug extends Field
@@ -25,32 +24,32 @@ class Slug extends Field
         parent::__construct($name, $attribute, $resolveCallback);
     }
 
-    public function slugModel(string $model): Element
+    public function slugModel(string $model): self
     {
         return $this->withMeta(['model' => $model]);
     }
     
-    public function slugUnique(): Element
+    public function slugUnique(): self
     {
         return $this->setOption('generateUniqueSlugs', true);
     }
 
-    public function slugMaxLength(int $length): Element
+    public function slugMaxLength(int $length): self
     {
         return $this->setOption('maximumLength', $length);
     }
 
-    public function slugSeparator(string $separator): Element
+    public function slugSeparator(string $separator): self
     {
         return $this->setOption('slugSeparator', $separator);
     }
 
-    public function slugLanguage(string $language): Element
+    public function slugLanguage(string $language): self
     {
         return $this->setOption('slugLanguage', $language);
     }
 
-    public function event(string $eventType): Element
+    public function event(string $eventType): self
     {
         if (in_array($eventType, ['keyup', 'blur'])) {
             return $this->setOption('event', $eventType);
@@ -59,7 +58,7 @@ class Slug extends Field
         return $this->setOption('event', 'keyup');
     }
 
-    protected function setOption(string $name, string $value): Element
+    protected function setOption(string $name, string $value): self
     {
         $this->options[$name] = $value;
         return $this->withMeta(['options' => $this->options]);
